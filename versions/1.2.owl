@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+  <!ENTITY dcterms "http://purl.org/dc/terms/#">
+  <!ENTITY dc "http://purl.org/dc/elements/1.1/">
+  <!ENTITY foaf "http://xmlns.com/foaf/0.1/#">
+  <!ENTITY gn "http://www.geonames.org/ontology#">
+  <!ENTITY frbr "http://purl.org/vocab/frbr/core#">
+  <!ENTITY wn "http://wordnet-rdf.princeton.edu/ontology#">
+  <!ENTITY geojson "http://geojson.org/geojson-ld/#">
+  <!ENTITY schema "http://schema.org/">
+]>
+<rdf:RDF xmlns="http://purl.org/nanohistory/ns/#"
+  xml:base="http://purl.org/nanohistory/ns/"
+  xmlns:rdf="&rdf;"
+  xmlns:rdfs="&rdfs;"
+  xmlns:owl="&owl;"
+  xmlns:skos="&skos;"
+  xmlns:dcterms="&dcterms;"
+  xmlns:dc="&dc;"
+  xmlns:vann="http://purl.org/vocab/vann/">
+
+<owl:Ontology rdf:about="http://purl.org/nanohistory/ns/">
+  <dc:title rdf:datatype="&xsd;string">Representation of the Nanohistory.Org Data Model</dc:title>
+  <dc:creator rdf:datatype="&xsd;string">Matthew Milner</dc:creator>
+  <dc:source rdf:datatype="&xsd;string">https://www.nanohistory.org</dc:source>
+  <dc:language rdf:datatype="&xsd;language">en</dc:language>
+  <dc:date>2018-01-16</dc:date>
+  <dcterms:created rdf:datatype="&xsd;dateTime">2014-06-02T12:35:48</dcterms:created>
+  <dcterms:modified rdf:datatype="&xsd;dateTime">2020-03-08T15:09:14</dcterms:modified>
+  <owl:versionInfo rdf:datatype="&xsd;decimal">1.2</owl:versionInfo>
+  <dc:rights xml:lang="en">This ontology is distributed under an MIT License - https://choosealicense.com/licenses/mit/</dc:rights>
+  <vann:preferredNamespacePrefix rdf:datatype="&xsd;string">nanohistory</vann:preferredNamespacePrefix>
+  <vann:preferredNamespaceUri rdf:resource="http://purl.org/nanohistory/ns/#"/>
+  <rdfs:comment rdf:datatype="&xsd;string">This model represents the data model employed in the prototype historical research platform Nanohistory.Org</rdfs:comment>
+  <dc:description xml:lang="en">Nanohistory.Org employs a distinct approach to event modeling, and the documentation of historical interactions as statements or assertions drawn from a range of documentary evidence and cultural heritage artifacts. Its primary purpose is to provide scholars working in archives and other repositories means of abstracting content history-as-data.</dc:description>
+  <dc:description rdf:resource="http://ns.nanohistory.org/versions/1.2.svg"/>
+  <vann:changes rdf:datatype="&xsd;string">Revised owl header, and added #Collective entities</vann:changes>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Component"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#TemporalComponent"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Entity"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#NamedEntity"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Event"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Date"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Calendar"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#CalendarTransition"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Identifier"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Spatial"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Person"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Organization"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Place"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Term"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Thing"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Collective"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Predicate"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Verb"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Relationship"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#Preposition"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#agent"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#object"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#verb"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#id"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#name"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#variantName"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#type"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#language"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#foreName"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#middleNames"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#surName"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#thingTitle"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#startDate"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#endDate"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#identifiedBy"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#dateInfo"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#dateCalendar"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#dateFormatted"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#dateHighJulian"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#dateLowJulian"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#dateSource"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#calendarTransitionPlace"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#calendarOld"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#calendarNew"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#space"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#coordinate"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#identifierType"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#identifierInformation"/>
+  <dcterms:hasPart xml:lang="en" rdf:resource="#collectiveType"/>
+</owl:Ontology>
+
+<!-- Classes -->
+<owl:Class rdf:ID="Component">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Components</rdfs:label>
+  <rdfs:comment xml:lang="en">Super class for all Nanohistory Data</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:ID="TemporalComponent">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Temporal Components</rdfs:label>
+  <rdfs:comment xml:lang="en">Super class for all Nanohistory Temporal Components</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Component"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Entity">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Entity</rdfs:label>
+  <rdfs:comment xml:lang="en">Super class for all Nanohistory Entities</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#TemporalComponent"/>
+</owl:Class>
+
+<owl:Class rdf:ID="NamedEntity">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Named Entities</rdfs:label>
+  <rdfs:comment xml:lang="en">Super class for all Nanohistory Named Entities</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Individual"/>
+  <skos:broadMatch rdf:resource="&dcterms;Agent"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Event">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Event</rdfs:label>
+  <rdfs:comment xml:lang="en">A unnamed, unique directed graph consisting of an agent, verb, and object, representing an action</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Individual"/>
+  <skos:related rdf:resource="&schema;Action"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Date">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Date</rdfs:label>
+  <rdfs:comment xml:lang="en">A date, either as a start or end date, or merely a point. Conceptualized as a temporal referent. Works in concert with Spatial for spatio-temporal location and extension of events.</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Component"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Calendar">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Calendar</rdfs:label>
+  <rdfs:comment xml:lang="en">Calendar systems used for dating. Classed as a Temporal Component because Calendars have starts and stops.</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#TemporalComponent"/>
+</owl:Class>
+
+<owl:Class rdf:ID="CalendarTransition">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Calendar Transition</rdfs:label>
+  <rdfs:comment xml:lang="en">Calendar systems used for dating</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#TemporalComponent"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Identifier">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Identifier</rdfs:label>
+  <rdfs:comment xml:lang="en">Identifier</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Component"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Spatial">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Spatial</rdfs:label>
+  <rdfs:comment xml:lang="en">Spatial Coordinates and Data</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#TemporalComponent"/>
+  <skos:related rdf:resource="&geojson;geometry"/>
+  <skos:related rdf:resource="&dcterms;Point"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Collective">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Collective</rdfs:label>
+  <rdfs:comment xml:lang="en">Collective Entity</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Entity"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Individual">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Individual</rdfs:label>
+  <rdfs:comment xml:lang="en">Individual Entity</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Entity"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Person">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Person</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual named person, alive or dead; real or fictitious</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#NamedEntity"/>
+  <skos:closeMatch rdf:resource="&frbr;Person"/>
+  <skos:broadMatch rdf:resource="&foaf;Term_Person"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Organization">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Organization</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual named corporate entity, real or fictitious</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#NamedEntity"/>
+  <skos:exactMatch rdf:resource="&frbr;CorporateBody"/>
+  <skos:broadMatch rdf:resource="&foaf;Term_Organization"/>
+  <skos:related rdf:resource="&foaf;Term_Group"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Place">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Place</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual named place, real or fictitious. Can be circumscribed using coordinates, or not</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#NamedEntity"/>
+  <skos:closeMatch rdf:resource="&frbr;Place"/>
+  <skos:broadMatch rdf:resource="&dcterms;Location"/>
+  <skos:broadMatch rdf:resource="&gn;Feature"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Term">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Term</rdfs:label>
+  <rdfs:comment xml:lang="en">A literal string representing a common noun or abstract concept (collective or individual); or an individual name for an abstract entity such as an historical episode, serial publication, referential textual structure, or legal / philosophical premise</rdfs:comment>  
+  <rdfs:subClassOf rdf:resource="#NamedEntity"/>
+  <skos:broadMatch rdf:resource="&wn;noun"/>
+  <skos:broadMatch rdf:resource="&wn;adjective"/>
+  <skos:broadMatch rdf:resource="&frbr;Concept"/>
+  <skos:broadMatch rdf:resource="&frbr;Object"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Thing">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Thing</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual named work or artifact created by an agent with a specific title; real or fictitious</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#NamedEntity"/>
+  <skos:closeMatch rdf:resource="&frbr;Expression"/>
+  <skos:broadMatch rdf:resource="&foaf;Term_Document"/>
+</owl:Class>
+
+<owl:Class rdf:ID="personalTitle">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">personalTitle</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual title or office held by a person, such as a King or a Director, etc.</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Event"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Serial">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Serial</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual name for a serial publication.</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Term"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Episode">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Episode</rdfs:label>
+  <rdfs:comment xml:lang="en">An individual name given to an historical phenomenon or happening - commonly described as an event 'name'.</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Term"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Predicate">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Predicate</rdfs:label>
+  <rdfs:comment xml:lang="en">Super class for all Nanohistory event predicates. Includes past- or perfect tense verbs representing historical action; also, minimal prepositions and relationships</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Component"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Action">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Action</rdfs:label>
+  <rdfs:comment xml:lang="en">Past- or perfect tense verbs representing historical action</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Predicate"/>
+  <skos:closeMatch rdf:resource="&wn;Verb"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Relationship">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Relationship</rdfs:label>
+  <rdfs:comment xml:lang="en">Relationships</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Predicate"/>
+</owl:Class>
+
+<owl:Class rdf:ID="Preposition">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:label rdf:datatype="&xsd;string" xml:lang="en">Preposition</rdfs:label>
+  <rdfs:comment xml:lang="en">Prepositions</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Predicate"/>
+</owl:Class>
+
+<!-- Datatype Properties -->
+<owl:ObjectProperty rdf:ID="agent">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Event"/>
+  <rdfs:range rdf:resource="#Entity"/>
+  <rdfs:label xml:lang="en">Agent</rdfs:label>
+  <rdfs:comment xml:lang="en">All Nanohistory Agents</rdfs:comment>
+  <skos:related rdf:resource="&foaf;Agent"/>
+  <skos:broadMatch rdf:resource="&dc;creator"/>
+  <skos:broadMatch rdf:resource="&dc;publisher"/>
+  <skos:broadMatch rdf:resource="&dc;contributor"/>
+  <skos:related rdf:resource="&dcterms;mediator"/>
+  <skos:related rdf:resource="&dcterms;rightsHolder"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="object">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Event"/>
+  <rdfs:range rdf:resource="#Entity"/>
+  <rdfs:label xml:lang="en">Object</rdfs:label>
+  <rdfs:comment xml:lang="en">All Nanohistory Objects</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="verb">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Event"/>
+  <rdfs:range rdf:resource="#Predicate"/>
+  <rdfs:label xml:lang="en">Verb</rdfs:label>
+  <rdfs:comment xml:lang="en">All Nanohistory Verbs</rdfs:comment>
+  <skos:related rdf:resource="&dc;relation"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="startDate">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#TemporalComponent"/>
+  <rdfs:range rdf:resource="#Date"/>
+  <rdfs:label xml:lang="en">Start Date</rdfs:label>
+  <rdfs:comment xml:lang="en">Start Date for an entity</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="endDate">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#TemporalComponent"/>
+  <rdfs:range rdf:resource="#Date"/>
+  <rdfs:label xml:lang="en">End Date</rdfs:label>
+  <rdfs:comment xml:lang="en">End Date for an entity</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="identifiedBy">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Entity"/>
+  <rdfs:range rdf:resource="#Identifier"/>
+  <rdfs:label xml:lang="en">Identified by</rdfs:label>
+  <rdfs:comment xml:lang="en">Identifier for an entity</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="dateCalendar">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Date"/>
+  <rdfs:range rdf:resource="#Calendar"/>
+  <rdfs:label xml:lang="en">Date Calendar</rdfs:label>
+  <rdfs:comment xml:lang="en">Calendar for date</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="dateSource">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Date"/>
+  <rdfs:range rdf:resource="#Thing"/>
+  <rdfs:label xml:lang="en">Date Source</rdfs:label>
+  <rdfs:comment xml:lang="en">Source for Date</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="calendarTransitionPlace">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#CalendarTransition"/>
+  <rdfs:range rdf:resource="#Place"/>
+  <rdfs:label xml:lang="en">Calendar Transition Place</rdfs:label>
+  <rdfs:comment xml:lang="en">Place for Calendar Transition</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="calendarOld">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#CalendarTransition"/>
+  <rdfs:range rdf:resource="#Calendar"/>
+  <rdfs:label xml:lang="en">Old Calendar</rdfs:label>
+  <rdfs:comment xml:lang="en">Calendar retired during a Calendar Transition</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="calendarNew">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#CalendarTransition"/>
+  <rdfs:range rdf:resource="#Calendar"/>
+  <rdfs:label xml:lang="en">New Calendar</rdfs:label>
+  <rdfs:comment xml:lang="en">Calendar commenced during a Calendar Transition</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:ID="space">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Place"/>
+  <rdfs:range rdf:resource="#Spatial"/>
+  <rdfs:label xml:lang="en">Space</rdfs:label>
+  <rdfs:comment xml:lang="en">Spatial Coordinates and Data</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:ID="id">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Component"/>
+  <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+  <rdfs:label xml:lang="en">Nanohistory Identifier</rdfs:label>
+  <rdfs:comment xml:lang="en"> Unique Nanohistory identifier</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="name">
+<rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#NamedEntity"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Name</rdfs:label>
+  <rdfs:comment xml:lang="en">A name for a named entity</rdfs:comment>
+  <skos:closeMatch rdf:resource="&skos;prefLabel"/>
+  <skos:broadMatch rdf:resource="&foaf;Term_name"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="variantName">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#NamedEntity"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Variant Name</rdfs:label>
+  <rdfs:comment xml:lang="en">An alternative spelling or variant of the name of a named entity</rdfs:comment>
+  <skos:closeMatch rdf:resource="&skos;altLabel"/>
+  <skos:closeMatch rdf:resource="&skos;hiddenLabel"/>
+  <skos:related rdf:resource="&foaf;Term_name"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="type">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Component"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Nanohistory Type</rdfs:label>
+  <rdfs:comment xml:lang="en">A type of Nanohistory Component</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="language">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Component"/>
+  <rdfs:range rdf:resource="&xsd;language"/>
+  <rdfs:label xml:lang="en">Language</rdfs:label>
+  <rdfs:comment xml:lang="en">Language used in a Nanohistory component, using ISO639-2</rdfs:comment>
+  <skos:closeMatch rdf:resource="&dcterms;ISO639-2"/>
+  <skos:related rdf:resource="&dcterms;ISO639-3"/>
+  <skos:broadMatch rdf:resource="&dc;language"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="foreName">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:subPropertyOf rdf:resource="#name"/>
+  <rdfs:domain rdf:resource="#Person"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Forename</rdfs:label>
+  <rdfs:comment xml:lang="en">A fore or first name of a person</rdfs:comment>
+  <skos:closeMatch rdf:resource="&foaf;Term_firstName"/>
+  <skos:closeMatch rdf:resource="&foaf;Term_givenname"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="middleNames">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:subPropertyOf rdf:resource="#name"/>
+  <rdfs:domain rdf:resource="#Person"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Middle Names</rdfs:label>
+  <rdfs:comment xml:lang="en">A middle names of a person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="surName">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:subPropertyOf rdf:resource="#name"/>
+  <rdfs:domain rdf:resource="#Person"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Surname</rdfs:label>
+  <rdfs:comment xml:lang="en">A sur- or family name of a person.</rdfs:comment>
+  <skos:closeMatch rdf:resource="&foaf;Term_surname"/>
+  <skos:closeMatch rdf:resource="&foaf;Term_lastName"/>
+  <skos:closeMatch rdf:resource="&foaf;Term_familyName"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="thingTitle">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:subPropertyOf rdf:resource="#name"/>
+  <rdfs:domain rdf:resource="#Thing"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Thing Title</rdfs:label>
+  <rdfs:comment xml:lang="en">A title for a thing</rdfs:comment>
+  <skos:exactMatch rdf:resource="&dc;title"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="dateInfo">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Date"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Date Information</rdfs:label>
+  <rdfs:comment xml:lang="en">Date as text string</rdfs:comment>
+  <skos:broadMatch rdf:resource="&dc;Date"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="dateFormatted">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Date"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Formatted Date</rdfs:label>
+  <rdfs:comment xml:lang="en">Date as YYYY-MM-DD, YYYY-MM, or YYYY</rdfs:comment>
+  <skos:related rdf:resource="&dc;Date"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="dateHighJulian">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Date"/>
+  <rdfs:range rdf:resource="&xsd;decimal"/>
+  <rdfs:label xml:lang="en">Highest Julian Date</rdfs:label>
+  <rdfs:comment xml:lang="en">Highest Date as Julian Day</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="dateLowJulian">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Date"/>
+  <rdfs:range rdf:resource="&xsd;decimal"/>
+  <rdfs:label xml:lang="en">Lowest Julian Date</rdfs:label>
+  <rdfs:comment xml:lang="en">Lowest Date as Julian Day</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="coordinate">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Spatial"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Coordinate Data</rdfs:label>
+  <rdfs:comment xml:lang="en">Coordinate geometry string representing points, polygons, and multipolygons following GeoJSON models. Delimited by ',', ';', and '|' respectively in order to allow for use of JSON-LD.</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="identifierType">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Identifier"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Identifier Type</rdfs:label>
+  <rdfs:comment xml:lang="en">Type of Identifier</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="identifierInformation">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Identifier"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Identifier Value</rdfs:label>
+  <rdfs:comment xml:lang="en">Value of Identifier</rdfs:comment>
+  <skos:broadMatch rdf:resource="&dc;Identifier"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="identifierInformation">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Identifier"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:label xml:lang="en">Identifier Value</rdfs:label>
+  <rdfs:comment xml:lang="en">Value of Identifier</rdfs:comment>
+  <skos:broadMatch rdf:resource="&dc;Identifier"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="collectiveType">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Collective"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The Entity Type of the Collective Entity</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:ID="collectiveType">
+  <rdfs:isDefinedBy rdf:resource="http://purl.org/nanohistory/ns/"/>
+  <rdfs:domain rdf:resource="#Collective"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The Entity Type of the Collective Entity</rdfs:comment>
+</owl:DatatypeProperty>
+</rdf:RDF>
