@@ -1,0 +1,41 @@
+# ------------------------------------------------------------
+# RDF Namespace Endpoint (.htaccess)
+# ------------------------------------------------------------
+
+# Disable Apache filename-based content negotiation
+Options -MultiViews
+
+# Ensure correct RDF MIME type
+AddType application/rdf+xml .rdf
+
+# Enable rewriting
+RewriteEngine On
+
+# ------------------------------------------------------------
+# Prevent rewrite loops for concrete representations
+# ------------------------------------------------------------
+RewriteRule ^(verbs\.rdf|index\.html)$ - [L]
+
+# ------------------------------------------------------------
+# Content negotiation for the namespace URI (/verbs/)
+# ------------------------------------------------------------
+
+# Prefer RDF when explicitly requested
+RewriteCond %{HTTP_ACCEPT} (^|,)\s*application/rdf\+xml\s*(;|,|$)
+RewriteRule ^$ verbs.rdf [L]
+
+# Serve HTML for browsers
+RewriteCond %{HTTP_ACCEPT} (^|,)\s*text/html\s*(;|,|$)
+RewriteRule ^$ index.html [L]
+
+# ------------------------------------------------------------
+# Fallback: default to RDF
+# ------------------------------------------------------------
+RewriteRule ^$ verbs.rdf [L]
+
+# ------------------------------------------------------------
+# Ensure correct Vary header for caches
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header set Vary "Accept"
+</IfModule>

@@ -1,0 +1,667 @@
+@prefix : <http://purl.org/nanohistory/ns/#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix wn: <http://wordnet-rdf.princeton.edu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/#> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/#> .
+@prefix geojson: <http://geojson.org/geojson-ld/#> .
+@prefix rdfstar: <http://www.w3.org/ns/rdf-star#> .
+@base <http://purl.org/nanohistory/ns/#> .
+
+<http://purl.org/nanohistory/ns/> rdf:type owl:Ontology ;
+                                   dc:creator "Matthew Milner" ;
+                                   dc:date "2024-07-24" ;
+                                   dc:description <http://ns.nanohistory.org/versions/2.0.svg> ,
+                                                  "Nanohistory.Org employs a distinct approach to event modeling, and the documentation of historical interactions as statements or assertions drawn from a range of documentary evidence and cultural heritage artifacts. Its primary purpose is to provide scholars working in archives and other repositories means of abstracting content history-as-data."@en ;
+                                   dc:language "en"^^xsd:language ;
+                                   dc:rights "This ontology is distributed under an MIT License - https://choosealicense.com/licenses/mit/"@en ;
+                                   dc:source "https://www.nanohistory.org" ;
+                                   dc:title "Representation of the Nanohistory.Org Data Model" ;
+                                   dcterms:created "2024-07-24T12:35:48"^^xsd:dateTime ;
+                                   dcterms:hasPart :Calendar ,
+                                                   :CalendarTransition ,
+                                                   :Collective ,
+                                                   :Component ,
+                                                   :Date ,
+                                                   :Entity ,
+                                                   :Event ,
+                                                   :Identifier ,
+                                                   :Individual ,
+                                                   :NamedEntity ,
+                                                   :Organization ,
+                                                   :Person ,
+                                                   :Place ,
+                                                   :Spatial ,
+                                                   :TemporalComponent ,
+                                                   :Term ,
+                                                   :Thing ,
+                                                   :calendarNew ,
+                                                   :calendarOld ,
+                                                   :calendarTransitionPlace ,
+                                                   :collectiveMember ,
+                                                   :collectiveType ,
+                                                   :coordinate ,
+                                                   :dateCalendar ,
+                                                   :dateFormatted ,
+                                                   :dateHighJulian ,
+                                                   :dateInfo ,
+                                                   :dateLowJulian ,
+                                                   :dateSource ,
+                                                   :endDate ,
+                                                   :foreName ,
+                                                   :id ,
+                                                   :identifiedBy ,
+                                                   :identifierInformation ,
+                                                   :identifierType ,
+                                                   :language ,
+                                                   :middleNames ,
+                                                   :name ,
+                                                   :space ,
+                                                   :startDate ,
+                                                   :surName ,
+                                                   :thingTitle ,
+                                                   :titularForm ,
+                                                   :type ,
+                                                   :variantName ;
+                                   vann:changes "Major Revision, implementing RDF-Star, and Verbs as Properties, with associated child ontology at http://purl.org/nanohistory/verbs/#" ;
+                                   vann:preferredNamespacePrefix "nanohistory" ;
+                                   vann:preferredNamespaceUri : ;
+                                   rdfs:comment "This model represents the data model employed in the prototype historical research platform Nanohistory.Org" ;
+                                   owl:versionInfo 2.0 .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+dc:date rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/language
+dc:language rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/rights
+dc:rights rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/source
+dc:source rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/#created
+dcterms:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/#hasPart
+dcterms:hasPart rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/changes
+vann:changes rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#broadMatch
+skos:broadMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+skos:closeMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+skos:exactMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#related
+skos:related rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/nanohistory/ns/#AffirmativeVerb
+:AffirmativeVerb rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :Verb ;
+                 rdfs:domain :Entity ;
+                 rdfs:range :Entity ;
+                 rdfs:comment "Upper-level Sub-Property for Events asserting something did occur"@en ;
+                 rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                 rdfs:label "Affirmative Verb"@en .
+
+
+###  http://purl.org/nanohistory/ns/#NegativeVerb
+:NegativeVerb rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :Verb ;
+              rdfs:domain :Entity ;
+              rdfs:range :Entity ;
+              rdfs:comment "Upper-level Core Sub-Property for Events asserting something did not occur"@en ;
+              rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+              rdfs:label "Negative Verb"@en .
+
+
+###  http://purl.org/nanohistory/ns/#Preposition
+:Preposition rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :Verb ;
+             rdfs:domain :Event ;
+             rdfs:range :Entity ;
+             rdfs:comment "Upper-level Core Sub-Property for Events asserting an indirect or prepositional secondary occurence, state, or relationship"@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "Preposition"@en .
+
+
+###  http://purl.org/nanohistory/ns/#Relationship
+:Relationship rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :Verb ;
+              rdfs:domain :Entity ;
+              rdfs:range :Entity ;
+              rdfs:comment "Upper-level Core Sub-Property for Events asserting a relational state between entities"@en ;
+              rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+              rdfs:label "Relationship"@en .
+
+
+###  http://purl.org/nanohistory/ns/#Verb
+:Verb rdf:type owl:ObjectProperty ;
+      rdfs:domain :Entity ;
+      rdfs:range :Entity ;
+      rdfs:comment "Core Property for Events"@en ;
+      rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+      rdfs:label "Verb"@en .
+
+
+###  http://purl.org/nanohistory/ns/#calendarNew
+:calendarNew rdf:type owl:ObjectProperty ;
+             rdfs:domain :CalendarTransition ;
+             rdfs:range :Calendar ;
+             rdfs:comment "Calendar commenced during a Calendar Transition"@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "New Calendar"@en .
+
+
+###  http://purl.org/nanohistory/ns/#calendarOld
+:calendarOld rdf:type owl:ObjectProperty ;
+             rdfs:domain :CalendarTransition ;
+             rdfs:range :Calendar ;
+             rdfs:comment "Calendar retired during a Calendar Transition"@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "Old Calendar"@en .
+
+
+###  http://purl.org/nanohistory/ns/#calendarTransitionPlace
+:calendarTransitionPlace rdf:type owl:ObjectProperty ;
+                         rdfs:domain :CalendarTransition ;
+                         rdfs:range :Place ;
+                         rdfs:comment "Place for Calendar Transition"@en ;
+                         rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                         rdfs:label "Calendar Transition Place"@en .
+
+
+###  http://purl.org/nanohistory/ns/#dateCalendar
+:dateCalendar rdf:type owl:ObjectProperty ;
+              rdfs:domain :Date ;
+              rdfs:range :Calendar ;
+              rdfs:comment "Calendar for date"@en ;
+              rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+              rdfs:label "Date Calendar"@en .
+
+
+###  http://purl.org/nanohistory/ns/#dateSource
+:dateSource rdf:type owl:ObjectProperty ;
+            rdfs:domain :Date ;
+            rdfs:range :Thing ;
+            rdfs:comment "Source for Date"@en ;
+            rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+            rdfs:label "Date Source"@en .
+
+
+###  http://purl.org/nanohistory/ns/#endDate
+:endDate rdf:type owl:ObjectProperty ;
+         rdfs:domain :TemporalComponent ;
+         rdfs:range :Date ;
+         rdfs:comment "End Date for an entity"@en ;
+         rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+         rdfs:label "End Date"@en .
+
+
+###  http://purl.org/nanohistory/ns/#identifiedBy
+:identifiedBy rdf:type owl:ObjectProperty ;
+              rdfs:domain :Entity ;
+              rdfs:range :Identifier ;
+              rdfs:comment "Identifier for an entity"@en ;
+              rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+              rdfs:label "Identified by"@en .
+
+
+###  http://purl.org/nanohistory/ns/#space
+:space rdf:type owl:ObjectProperty ;
+       rdfs:domain :Place ;
+       rdfs:range :Spatial ;
+       rdfs:comment "Spatial Coordinates and Data"@en ;
+       rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+       rdfs:label "Space"@en .
+
+
+###  http://purl.org/nanohistory/ns/#startDate
+:startDate rdf:type owl:ObjectProperty ;
+           rdfs:domain :TemporalComponent ;
+           rdfs:range :Date ;
+           rdfs:comment "Start Date for an entity"@en ;
+           rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+           rdfs:label "Start Date"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/nanohistory/ns/#collectiveMember
+:collectiveMember rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Collective ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "The ID of member of a Collective Entity"@en ;
+                  rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> .
+
+
+###  http://purl.org/nanohistory/ns/#collectiveType
+:collectiveType rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Collective ;
+                rdfs:range xsd:string ;
+                rdfs:comment "The Entity Type of the Collective Entity"@en ;
+                rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> .
+
+
+###  http://purl.org/nanohistory/ns/#coordinate
+:coordinate rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Spatial ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Coordinate geometry string representing points, polygons, and multipolygons following GeoJSON models. Delimited by ',', ';', and '|' respectively in order to allow for use of JSON-LD."@en ;
+            rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+            rdfs:label "Coordinate Data"@en .
+
+
+###  http://purl.org/nanohistory/ns/#dateFormatted
+:dateFormatted rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Date ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Date as YYYY-MM-DD, YYYY-MM, or YYYY"@en ;
+               rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+               rdfs:label "Formatted Date"@en ;
+               skos:related dc:Date .
+
+
+###  http://purl.org/nanohistory/ns/#dateHighJulian
+:dateHighJulian rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Date ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Highest Date as Julian Day"@en ;
+                rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                rdfs:label "Highest Julian Date"@en .
+
+
+###  http://purl.org/nanohistory/ns/#dateInfo
+:dateInfo rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Date ;
+          rdfs:range xsd:string ;
+          rdfs:comment "Date as text string"@en ;
+          rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+          rdfs:label "Date Information"@en ;
+          skos:broadMatch dc:Date .
+
+
+###  http://purl.org/nanohistory/ns/#dateLowJulian
+:dateLowJulian rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Date ;
+               rdfs:range xsd:decimal ;
+               rdfs:comment "Lowest Date as Julian Day"@en ;
+               rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+               rdfs:label "Lowest Julian Date"@en .
+
+
+###  http://purl.org/nanohistory/ns/#foreName
+:foreName rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf :name ;
+          rdfs:domain :Person ;
+          rdfs:range xsd:string ;
+          rdfs:comment "A fore or first name of a person"@en ;
+          rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+          rdfs:label "Forename"@en ;
+          skos:closeMatch foaf:Term_firstName ,
+                          foaf:Term_givenname .
+
+
+###  http://purl.org/nanohistory/ns/#id
+:id rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Component ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:comment " Unique Nanohistory identifier"@en ;
+    rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+    rdfs:label "Nanohistory Identifier"@en .
+
+
+###  http://purl.org/nanohistory/ns/#identifierInformation
+:identifierInformation rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Identifier ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "Value of Identifier"@en ;
+                       rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                       rdfs:label "Identifier Value"@en ;
+                       skos:broadMatch dc:Identifier .
+
+
+###  http://purl.org/nanohistory/ns/#identifierType
+:identifierType rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Identifier ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Type of Identifier"@en ;
+                rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                rdfs:label "Identifier Type"@en .
+
+
+###  http://purl.org/nanohistory/ns/#language
+:language rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Component ;
+          rdfs:range xsd:language ;
+          rdfs:comment "Language used in a Nanohistory component, using ISO639-2"@en ;
+          rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+          rdfs:label "Language"@en ;
+          skos:broadMatch dc:language ;
+          skos:closeMatch dcterms:ISO639-2 ;
+          skos:related dcterms:ISO639-3 .
+
+
+###  http://purl.org/nanohistory/ns/#middleNames
+:middleNames rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :name ;
+             rdfs:domain :Person ;
+             rdfs:range xsd:string ;
+             rdfs:comment "A middle names of a person"@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "Middle Names"@en .
+
+
+###  http://purl.org/nanohistory/ns/#name
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:domain :NamedEntity ;
+      rdfs:range xsd:string ;
+      rdfs:comment "A name for a named entity"@en ;
+      rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+      rdfs:label "Name"@en ;
+      skos:broadMatch foaf:Term_name ;
+      skos:closeMatch skos:prefLabel .
+
+
+###  http://purl.org/nanohistory/ns/#surName
+:surName rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :name ;
+         rdfs:domain :Person ;
+         rdfs:range xsd:string ;
+         rdfs:comment "A sur- or family name of a person."@en ;
+         rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+         rdfs:label "Surname"@en ;
+         skos:closeMatch foaf:Term_familyName ,
+                         foaf:Term_lastName ,
+                         foaf:Term_surname .
+
+
+###  http://purl.org/nanohistory/ns/#thingTitle
+:thingTitle rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :name ;
+            rdfs:domain :Thing ;
+            rdfs:range xsd:string ;
+            rdfs:comment "A title for a thing."@en ;
+            rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+            rdfs:label "Thing Title"@en ;
+            skos:exactMatch dc:title .
+
+
+###  http://purl.org/nanohistory/ns/#titularForm
+:titularForm rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :name ;
+             rdfs:domain :personalTitle ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The normative form for a personal title, or honorific."@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "Personal Title"@en ;
+             skos:exactMatch dc:title .
+
+
+###  http://purl.org/nanohistory/ns/#type
+:type rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Component ;
+      rdfs:range xsd:string ;
+      rdfs:comment "A type of Nanohistory Component"@en ;
+      rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+      rdfs:label "Nanohistory Type"@en .
+
+
+###  http://purl.org/nanohistory/ns/#variantName
+:variantName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :NamedEntity ;
+             rdfs:range xsd:string ;
+             rdfs:comment "An alternative spelling or variant of the name of a named entity"@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "Variant Name"@en ;
+             skos:closeMatch skos:altLabel ,
+                             skos:hiddenLabel ;
+             skos:related foaf:Term_name .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/nanohistory/ns/#Calendar
+:Calendar rdf:type owl:Class ;
+          rdfs:subClassOf :TemporalComponent ;
+          rdfs:comment "Calendar systems used for dating. Classed as a Temporal Component because Calendars have starts and stops."@en ;
+          rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+          rdfs:label "Calendar" .
+
+
+###  http://purl.org/nanohistory/ns/#CalendarTransition
+:CalendarTransition rdf:type owl:Class ;
+                    rdfs:subClassOf :TemporalComponent ;
+                    rdfs:comment "Calendar systems used for dating"@en ;
+                    rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                    rdfs:label "Calendar Transition" .
+
+
+###  http://purl.org/nanohistory/ns/#Collective
+:Collective rdf:type owl:Class ;
+            rdfs:subClassOf :Entity ;
+            rdfs:comment "Collective Entity"@en ;
+            rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+            rdfs:label "Collective" .
+
+
+###  http://purl.org/nanohistory/ns/#Component
+:Component rdf:type owl:Class ;
+           rdfs:comment "Super class for all Nanohistory Data"@en ;
+           rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+           rdfs:label "Components" .
+
+
+###  http://purl.org/nanohistory/ns/#Date
+:Date rdf:type owl:Class ;
+      rdfs:subClassOf :Component ;
+      rdfs:comment "A date, either as a start or end date, or merely a point. Conceptualized as a temporal referent. Works in concert with Spatial for spatio-temporal location and extension of events."@en ;
+      rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+      rdfs:label "Date" .
+
+
+###  http://purl.org/nanohistory/ns/#Entity
+:Entity rdf:type owl:Class ;
+        rdfs:subClassOf :TemporalComponent ;
+        rdfs:comment "Super class for all Nanohistory Entities"@en ;
+        rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+        rdfs:label "Entity" .
+
+
+###  http://purl.org/nanohistory/ns/#Episode
+:Episode rdf:type owl:Class ;
+         rdfs:subClassOf :NamedEntity ,
+                         :Term ;
+         rdfs:comment "An individual name given to an historical phenomenon or happening - commonly described as an event 'name'."@en ;
+         rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+         rdfs:label "Episode" .
+
+
+###  http://purl.org/nanohistory/ns/#Event
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf :Individual ,
+                       rdfstar:Triple ;
+       rdfs:comment "A unique directed graph consisting of an agent, verb, and object, representing an action"@en ;
+       rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+       rdfs:label "Event" ;
+       skos:related schema:Action .
+
+
+###  http://purl.org/nanohistory/ns/#Identifier
+:Identifier rdf:type owl:Class ;
+            rdfs:subClassOf :Component ;
+            rdfs:comment "Identifier"@en ;
+            rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+            rdfs:label "Identifier" .
+
+
+###  http://purl.org/nanohistory/ns/#Individual
+:Individual rdf:type owl:Class ;
+            rdfs:subClassOf :Entity ;
+            rdfs:comment "Individual Entity"@en ;
+            rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+            rdfs:label "Individual" .
+
+
+###  http://purl.org/nanohistory/ns/#NamedEntity
+:NamedEntity rdf:type owl:Class ;
+             rdfs:subClassOf :Individual ;
+             rdfs:comment "Super class for all Nanohistory Named Entities"@en ;
+             rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+             rdfs:label "Named Entities" ;
+             skos:broadMatch dcterms:Agent .
+
+
+###  http://purl.org/nanohistory/ns/#Organization
+:Organization rdf:type owl:Class ;
+              rdfs:subClassOf :NamedEntity ;
+              rdfs:comment "An individual named corporate entity, real or fictitious"@en ;
+              rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+              rdfs:label "Organization" ;
+              skos:broadMatch foaf:Term_Organization ;
+              skos:exactMatch frbr:CorporateBody ;
+              skos:related foaf:Term_Group .
+
+
+###  http://purl.org/nanohistory/ns/#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf :NamedEntity ;
+        rdfs:comment "An individual named person, alive or dead; real or fictitious"@en ;
+        rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+        rdfs:label "Person" ;
+        skos:broadMatch foaf:Term_Person ;
+        skos:closeMatch frbr:Person .
+
+
+###  http://purl.org/nanohistory/ns/#Place
+:Place rdf:type owl:Class ;
+       rdfs:subClassOf :NamedEntity ;
+       rdfs:comment "An individual named place, real or fictitious. Can be circumscribed using coordinates, or not"@en ;
+       rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+       rdfs:label "Place" ;
+       skos:broadMatch dcterms:Location ,
+                       gn:Feature ;
+       skos:closeMatch frbr:Place .
+
+
+###  http://purl.org/nanohistory/ns/#Serial
+:Serial rdf:type owl:Class ;
+        rdfs:subClassOf :NamedEntity ,
+                        :Term ;
+        rdfs:comment "An individual name for a serial publication."@en ;
+        rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+        rdfs:label "Serial" .
+
+
+###  http://purl.org/nanohistory/ns/#Spatial
+:Spatial rdf:type owl:Class ;
+         rdfs:subClassOf :TemporalComponent ;
+         rdfs:comment "Spatial Coordinates and Data"@en ;
+         rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+         rdfs:label "Spatial" ;
+         skos:related geojson:geometry ,
+                      dcterms:Point .
+
+
+###  http://purl.org/nanohistory/ns/#TemporalComponent
+:TemporalComponent rdf:type owl:Class ;
+                   rdfs:subClassOf :Component ;
+                   rdfs:comment "Super class for all Nanohistory Temporal Components"@en ;
+                   rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+                   rdfs:label "Temporal Components" .
+
+
+###  http://purl.org/nanohistory/ns/#Term
+:Term rdf:type owl:Class ;
+      rdfs:subClassOf :NamedEntity ;
+      rdfs:comment "A literal string representing a common noun or abstract concept (collective or individual); or an individual name for an abstract entity such as an historical episode, serial publication, referential textual structure, or legal / philosophical premise"@en ;
+      rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+      rdfs:label "Term" ;
+      skos:broadMatch frbr:Concept ,
+                      frbr:Object ,
+                      wn:adjective ,
+                      wn:noun .
+
+
+###  http://purl.org/nanohistory/ns/#Thing
+:Thing rdf:type owl:Class ;
+       rdfs:subClassOf :NamedEntity ;
+       rdfs:comment "An individual named work or artifact created by an agent with a specific title; real or fictitious"@en ;
+       rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+       rdfs:label "Thing" ;
+       skos:broadMatch foaf:Term_Document ;
+       skos:closeMatch frbr:Expression .
+
+
+###  http://purl.org/nanohistory/ns/#personalTitle
+:personalTitle rdf:type owl:Class ;
+               rdfs:subClassOf :Event ;
+               rdfs:comment "An individual title or office held by a person, such as a King or a Director, etc."@en ;
+               rdfs:isDefinedBy <http://purl.org/nanohistory/ns/> ;
+               rdfs:label "personalTitle" .
+
+
+###  http://www.w3.org/ns/rdf-star#Triple
+rdfstar:Triple rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
